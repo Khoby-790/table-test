@@ -40,12 +40,29 @@ function App() {
           // from row.original
           // for example:
           return (
-            <span className="font-light bg-green-200 text-green-800 px-1.5 rounded">
+            <span className="font-light truncate">
               {row.original.title}
             </span>
           );
         }
       },
+      {
+        Header: 'Body',
+        accessor: 'body',
+        width: 200,
+        Cell: ({ value, row }) => {
+          // here you can use value to render cell 
+          // with value of dataProperty
+          // or you can access all other row data properties 
+          // from row.original
+          // for example:
+          return (
+            <span className="font-light truncate">
+              {row.original.title}
+            </span>
+          );
+        }
+      }
     ],
     []
   );
@@ -80,27 +97,27 @@ function App() {
   } = tableInstance
 
   return (
-    <div className="mx-20 my-auto">
+    <div className="px-20  flex justify-center items-center flex-col py-30 dark:bg-gray-700 h-screen overflow-y-scroll w-screen">
       {/* <!-- This example requires Tailwind CSS v2.0+ --> */}
-      <div className="flex justify-between items-center my-3 sm:rounded-lg">
+      <div className="flex w-full justify-between items-center my-3 sm:rounded-lg">
         <div className="">
           <select className="border border-gray-300 p-2" value={pageSize}
             onChange={e => {
               setPageSize(Number(e.target.value))
             }}>
+            <option value={5}>5</option>
             <option value={10}>10</option>
-            <option value={25}>25</option>
             <option value={50}>50</option>
           </select>
         </div>
         <GlobalFilter setGlobalFilter={setGlobalFilter} globalFilter={globalFilter} />
       </div>
-      <div class="flex flex-col">
+      <div class="flex flex-col w-full">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <div class="shadow overflow-hidden border-b border-gray-200 dark:border-gray-200 sm:rounded-none">
               <table class="min-w-full divide-y divide-gray-200" {...getTableProps({ className: "min-w-full divide-y divide-gray-200" })}>
-                <thead class="bg-gray-50">
+                <thead class="bg-gray-100">
                   {// Loop over the header rows
                     headerGroups.map(headerGroup => (
                       // Apply the header row props
@@ -124,7 +141,7 @@ function App() {
                       prepareRow(row)
                       return (
                         // Apply the row props
-                        <tr {...row.getRowProps({})}>
+                        <tr {...row.getRowProps({ className:"odd:bg-gray-50 hover:odd:bg-gray-100"})}>
                           {// Loop over the rows cells
                             row.cells.map(cell => {
                               // Apply the cell props
@@ -142,7 +159,7 @@ function App() {
 
               </table>
               {/* <!-- This example requires Tailwind CSS v2.0+ --> */}
-              <nav class="bg-gray-300 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6" aria-label="Pagination">
+              <nav class="bg-gray-100 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6" aria-label="Pagination">
                 <div class="hidden sm:block">
                   <p class="text-sm text-gray-700">
                     Showing

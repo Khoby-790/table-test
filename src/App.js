@@ -16,7 +16,6 @@ function App() {
     const fetchData = async () => {
       const response = await fetch('https://jsonplaceholder.typicode.com/posts');
       const json = await response.json();
-      // console.log(json);
       setData(json);
     }
     fetchData();
@@ -41,7 +40,7 @@ function App() {
           // for example:
           return (
             <span className="font-light truncate">
-              {row.original.title}
+              {value}
             </span>
           );
         }
@@ -58,7 +57,7 @@ function App() {
           // for example:
           return (
             <span className="font-light truncate">
-              {row.original.title}
+              {value}
             </span>
           );
         }
@@ -112,6 +111,7 @@ function App() {
         </div>
         <GlobalFilter setGlobalFilter={setGlobalFilter} globalFilter={globalFilter} />
       </div>
+      {/* republican79@12 */}
       <div class="flex flex-col w-full">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -125,7 +125,7 @@ function App() {
                         {// Loop over the headers in each row
                           headerGroup.headers.map(column => (
                             // Apply the header cell props
-                            <th {...column.getHeaderProps(column.getSortByToggleProps({ className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" }))}>
+                            <th {...column.getHeaderProps(column.getSortByToggleProps({ className: "px-6 py-3 w-36 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" }))}>
                               {// Render the header
                                 column.render('Header')}
                             </th>
@@ -146,7 +146,7 @@ function App() {
                             row.cells.map(cell => {
                               // Apply the cell props
                               return (
-                                <td {...cell.getCellProps({ className: "px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" })}>
+                                <td {...cell.getCellProps({ className: "px-6 py-4 overflow-ellipsis	 flex-wrap w-1/3 text-sm font-medium text-gray-900" })}>
                                   {// Render the cell contents
                                     cell.render('Cell')}
                                 </td>
